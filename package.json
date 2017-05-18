@@ -1,0 +1,43 @@
+{
+  "name": "voting-app",
+  "version": "1.0.0",
+  "description": "ES6 Express and MongoDB REST API",
+  "main": "index.js",
+  "repository": "",
+  "author": "Vanco Stojkov <van100j@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon ./server/index.js --exec babel-node",
+    "build": "npm run clean && npm run build-server",
+    "build-server": "babel -d ./dist/server ./server --ignore /tests/ --no-comments --compact true --minified",
+    "heroku-postbuild": "npm run build",
+    "test": "cross-env NODE_ENV=test ./node_modules/.bin/mocha --slow 100 --reporter spec --colors --compilers js:babel-core/register --require babel-polyfill server/tests/**/*.test.js --recursive",
+    "clean": "rm -rf dist/server && mkdir -p dist/server"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.23.0",
+    "bcrypt": "^1.0.2",
+    "body-parser": "^1.17.1",
+    "compression": "^1.6.2",
+    "cors": "^2.8.3",
+    "dotenv": "^4.0.0",
+    "express": "^4.15.2",
+    "express-jwt": "^5.3.0",
+    "express-validation": "^1.0.2",
+    "helmet": "^3.6.0",
+    "http-status": "^1.0.1",
+    "joi": "^10.4.2",
+    "jsonwebtoken": "^7.4.0",
+    "mongoose": "^4.9.9"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-plugin-transform-regenerator": "^6.24.1",
+    "babel-preset-env": "^1.4.0",
+    "babel-register": "^6.24.1",
+    "chai": "^3.5.0",
+    "cross-env": "^5.0.0",
+    "mocha": "^3.4.1",
+    "supertest": "^3.0.0"
+  }
+}
