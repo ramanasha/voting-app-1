@@ -9,7 +9,7 @@
   "scripts": {
     "start": "nodemon ./server/index.js --exec babel-node",
     "build": "npm run clean && npm run build-server",
-    "build-server": "./node_modules/babel-cli/bin/babel.js -d ./dist/server ./server --ignore /tests/ --no-comments --compact true --minified",
+    "build-server": "./node_modules/.bin/babel -d ./dist/server ./server --ignore /tests/ --no-comments --compact true --minified",
     "heroku-postbuild": "npm run build",
     "test": "cross-env NODE_ENV=test ./node_modules/.bin/mocha --slow 100 --reporter spec --colors --compilers js:babel-core/register --require babel-polyfill server/tests/**/*.test.js --recursive",
     "clean": "rm -rf dist/server && mkdir -p dist/server"
