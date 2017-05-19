@@ -1,5 +1,5 @@
-// require('babel-register');
-require("babel-polyfill");
+// import "babel-polyfill";
+import "regenerator-runtime/runtime";
 
 import mongoose from 'mongoose';
 import config from './config/config';
