@@ -1,3 +1,6 @@
+// require('babel-register');
+require("babel-polyfill");
+
 import mongoose from 'mongoose';
 import config from './config/config';
 import app from './config/express';

@@ -59,22 +59,6 @@ function vote(req, res, next) {
     const userId = req.user ? req.user.id : undefined;
     try {
       const notVoted = await Vote.notVoted(pollId, req.ip, userId);
-
-      // const poll = await Poll.get(pollId);
-      // if(!poll.options.id(optionId))
-      //   throw new APIError('You tried to vote for non existing poll option!', httpStatus.NOT_FOUND, true);
-      //
-      // const savedPoll = await poll.update();
-
-      // const poll = await Poll.findOneAndUpdate(
-      //     {_id: pollId, "options._id": optionId},
-      //     { $inc: { "options.$.votes": 1 }},
-      //     {new: true}
-      // );
-      // return res.json({
-      //   poll
-      // });
-
       const poll = await Poll.vote(pollId, optionId);
       const vote = new Vote({ poll: pollId, user: userId, ipAddress: req.ip });
       const savedVote = await vote.save();
