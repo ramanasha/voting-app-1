@@ -15,8 +15,12 @@
     "clean": "rm -rf dist/server && mkdir -p dist/server"
   },
   "dependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-plugin-transform-regenerator": "^6.24.1",
     "babel-polyfill": "^6.23.0",
-    "bcrypt": "^1.0.2",
+    "babel-preset-env": "^1.4.0",
+    "babel-register": "^6.24.1",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.17.1",
     "compression": "^1.6.2",
     "cors": "^2.8.3",
@@ -28,10 +32,6 @@
     "http-status": "^1.0.1",
     "joi": "^10.4.2",
     "jsonwebtoken": "^7.4.0",
-    "babel-cli": "^6.24.1",
-    "babel-plugin-transform-regenerator": "^6.24.1",
-    "babel-preset-env": "^1.4.0",
-    "babel-register": "^6.24.1",
     "mongoose": "^4.9.9"
   },
   "devDependencies": {
