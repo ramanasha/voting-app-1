@@ -1,0 +1,56 @@
+<div class="modal fade show">
+  <div class="modal-dialog" role="document">
+    <form [formGroup]="accountForm" (ngSubmit)="onSubmit()">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Account</h5>
+        </div>
+        <div class="modal-body">
+          <div class="alert alert-danger" role="alert" *ngIf="error">
+            <button type="button" class="close" aria-label="Close" (click)="closeMsg()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            {{ error }}
+          </div>
+          <div class="alert alert-success" role="alert" *ngIf="msg">
+            <button type="button" class="close" aria-label="Close" (click)="closeMsg()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            {{ msg }}
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" formControlName="email" placeholder="Your email address">
+            <small class="error" *ngIf="!accountForm.controls.email.valid && accountForm.controls.email.touched ">Email should be a valid email address</small>
+          </div>
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" class="form-control" id="firstName" formControlName="firstName" placeholder="Your First Name">
+            <small class="error" *ngIf="!accountForm.controls.firstName.valid && accountForm.controls.firstName.touched ">First name should be at least 2 and no more than 30 characters long</small>
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" class="form-control" id="lastName" formControlName="lastName" placeholder="Your Last Name" #lastName>
+            <small class="error" *ngIf="!accountForm.controls.lastName.valid && accountForm.controls.lastName.touched ">Last name should be at least 2 and no more than 30 characters long</small>
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" formControlName="password" placeholder="Your Password">
+            <small *ngIf="accountForm.controls.password.valid">
+              Leave it empty if you don't wish to update your password
+            </small>
+            <small class="error" *ngIf="!accountForm.controls.password.valid && accountForm.controls.password.touched">Password should be at least 6 and no more than 20 characters long</small>
+          </div>
+          <div class="form-group">
+            <label for="confirmPassword">Password Confirmation</label>
+            <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword" placeholder="Confirm your Password">
+            <small class="error" *ngIf="!accountForm.controls.confirmPassword.valid && accountForm.controls.confirmPassword.touched">Password Confirmation should match the provided password</small>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" [disabled]="!accountForm.valid">Update</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+<nav class="navbar navbar-toggleable-sm navbar-inverse bg-primary">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" routerLink="/">Voting App</a>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="nav navbar-nav mr-auto">
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="polls">Polls</a>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav" *ngIf="!loggedIn()">
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="login">Login</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="signup">Sign Up</a>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav" *ngIf="loggedIn()">
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="manage/polls">Your Polls</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="account">Account</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" style="cursor: pointer;" (click)="onLogout()">Logout</a>
+      </li>
+    </ul>
+    <!-- <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
+    Manage
+  </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="#">Action</a>
+        <a class="dropdown-item" href="#">Another action</a>
+        <a class="dropdown-item" href="#">Something else here</a>
+      </div>
+    </div> -->
+  </div>
+</nav>

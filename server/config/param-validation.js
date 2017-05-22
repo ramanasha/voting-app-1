@@ -2,7 +2,7 @@ import Joi from 'joi';
 
 const pollOption = Joi.string()
   .min(1)
-  .max(255)
+  .max(50)
     .options({
       language: {
         string: {
@@ -16,7 +16,7 @@ const validators = {
   firstLastName: Joi.string().regex(/^([a-zA-Z\s\.\']{2,30}\s*)+$/).allow(''),
   email: Joi.string().email().required(),
   objectId: Joi.string().hex().required(),
-  pollTitle: Joi.string().required().min(2).max(255),
+  pollTitle: Joi.string().required().min(2).max(50),
   pollOption: pollOption,
   pollOptions: Joi.array()
     .items(pollOption)

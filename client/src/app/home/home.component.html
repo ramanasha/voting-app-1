@@ -1,0 +1,29 @@
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-3">Voting App</h1>
+    <p class="lead">Create unlimited number of polls and share them with your friends and family!</p>
+    <hr class="my-4">
+    <p>Get instant insights on votes, and make well informed decisions.</p>
+    <p class="lead">
+      <a class="btn btn-primary btn-lg" routerLink="signup" role="button" *ngIf="!loggedIn()">Start Now</a>
+      <a class="btn btn-primary btn-lg" routerLink="manage/polls" role="button" *ngIf="loggedIn()">Manage Your Polls</a>
+    </p>
+  </div>
+</div>
+
+<div class="container">
+  <h1 class="title">
+    Recent Polls
+    <a class="btn btn-outline-primary float-right" routerLink="polls">View all &raquo;</a>
+  </h1>
+  <ul class="list-group">
+    <li class="list-group-item list-group-item-action justify-content-between" *ngFor="let poll of polls; let i = index" (click)="onNavigate(poll.id)">
+      <div class="col-10">
+        {{ poll.title }}
+      </div>
+      <div class="col-2 text-right">
+        <span class="badge badge-default badge-pill">{{ poll.votes }} votes</span>
+      </div>
+    </li>
+  </ul>
+</div>

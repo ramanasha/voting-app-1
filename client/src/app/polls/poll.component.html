@@ -1,0 +1,32 @@
+<div class="modal fade show" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">{{ poll?.title }}</h5>
+          <button type="button" class="close" aria-label="Close" (click)="onClose()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="modal-body">
+          <div class="alert alert-danger" role="alert" *ngIf="error">
+            {{ error }}
+          </div>
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-action justify-content-between" *ngFor="let option of poll?.options; let i = index">
+              <div class="col-md-10">
+                {{ option.title }} <span class="badge badge-default badge-pill">{{ option.votes }} votes</span>
+              </div>
+              <div class="col-md-2 text-right">
+                <button class="btn btn-outline-primary btn-sm" type="button" (click)="onVote(option.id)">Vote</button>
+              </div>
+              <div [title]="(option.votes/poll.votes | percent) + ' of votes'" class="indicator" [ngStyle]="{'background-color': colors[i%colors.length], width: option.votes/poll.votes | percent}"></div>
+            </li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="onClose()">Cancel</button>
+        </div>
+      </div>
+  </div>
+</div>

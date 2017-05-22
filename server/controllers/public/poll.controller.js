@@ -12,16 +12,22 @@ import Vote from '../../models/vote.model';
  * @returns {data: Poll[], pagination: Pagination}
  */
 function list(req, res, next) {
-  const { limit = 50, skip = 0 } = req.query;
+  // const { limit = 10, skip = 0 } = req.query;
+  const { page = 1 } = req.query;
   (async function() {
     try {
-      const polls = await Poll.list({ skip, limit });
       const count = await Poll.count();
+      const limit = 10;
+      const totalPages = Math.ceil(count / limit);
+      const currentPage = page < 1 ? 1 : (page > totalPages ? totalPages : page);
+      const skip = Math.max(0, (currentPage - 1) * limit);
+
+      const polls = await Poll.list({ skip, limit });
       return res.json({
         data: polls,
         pagination: {
-          currentPage: ~~(skip / limit) + 1,
-          totalPages: Math.ceil(count / limit),
+          page: +currentPage,
+          totalPages,
           count,
           limit,
           skip

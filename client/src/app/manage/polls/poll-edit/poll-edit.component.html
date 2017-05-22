@@ -1,0 +1,59 @@
+<div class="modal fade show" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <form [formGroup]="pollForm" (ngSubmit)="onSubmit()">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">{{ editMode ? 'Update' : 'Add'}} Poll</h5>
+          <button type="button" class="close" aria-label="Close" (click)="onClose()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="modal-body">
+          <div class="alert alert-danger" role="alert" *ngIf="error">
+            {{ error }}
+          </div>
+          <div class="form-group">
+            <label for="title"><strong>Poll Title</strong></label>
+            <span *ngIf="editMode" class="badge badge-info badge-pill float-right">{{ poll?.votes }} votes</span>
+            <input type="text" id="title" class="form-control" formControlName="title">
+            <small class="error" *ngIf="!pollForm.controls['title'].valid && pollForm.controls['title'].touched ">Poll title is required with at least 2 and no more than 50 chars.</small>
+          </div>
+          <hr>
+          <div formGroupName="options">
+            <div class="row" *ngFor="let optionCtrl of optionControls(); let i = index" [formGroupName]="i">
+              <div class="col-12">
+                <small>Poll Option Title</small>
+              </div>
+              <div class="col-10 form-group">
+                <input type="text" id="option-{{ i }}" class="form-control" formControlName="title" placeholder="Poll Option Title">
+                <small class="error" *ngIf="!optionCtrl.valid && optionCtrl.touched ">Option title should be 1 to 50 characters long</small>
+              </div>
+              <div class="col-2 form-group text-right">
+                <button type="button" class="btn btn-outline-danger btn-sm" (click)="onDeletePollOption(i)">&times;</button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 text-right">
+                <button type="button" class="btn btn-outline-success btn-sm" (click)="onAddPollOption()">Add Option</button>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="form-group" *ngIf="editMode">
+            <ul class="list-group">
+              <li class="list-group-item list-group-item-info justify-content-between">Poll Options</li>
+              <li class="list-group-item justify-content-between" *ngFor="let option of poll?.options; let i = index">
+                {{ i + 1}}. {{ option.title }}
+                <span class="badge badge-default badge-pill">{{ option.votes }} votes</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="onClose()">Cancel</button>
+          <button type="submit" class="btn btn-primary" [disabled]="!pollForm.valid || !pollForm.touched">{{ editMode ? 'Update' : 'Add'}} Poll</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -33,6 +33,10 @@ function update(req, res, next) {
   (async function() {
     try {
       const user = await User.get(req.user.id);
+      const userByEmail = await User.findOne({email: req.body.email});
+
+      if(userByEmail && userByEmail.id != user.id)
+        throw new APIError('Email address already in use', httpStatus.CONFLICT, true);
 
       user.email = req.body.email;
       user.firstName = req.body.firstName;

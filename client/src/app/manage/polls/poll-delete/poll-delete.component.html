@@ -1,0 +1,27 @@
+<div class="modal fade show" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <form [formGroup]="pollForm" (ngSubmit)="onSubmit()">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Delete Poll</h5>
+          <button type="button" class="close" aria-label="Close" (click)="onClose()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="modal-body">
+          <div class="alert alert-danger" role="alert" *ngIf="error">
+            {{ error }}
+          </div>
+          <p>Are you sure you want to delete "<strong>{{poll?.title}}</strong>" poll?</p>
+          <p>
+            This action is irreversible and will delete all poll related data!
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="onClose()">Cancel</button>
+          <button type="submit" class="btn btn-danger">Delete Poll</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

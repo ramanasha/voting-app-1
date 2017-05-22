@@ -8,6 +8,7 @@ import helmet from 'helmet';
 import config from './config';
 import routes from '../routes/index.route';
 import APIError from '../errors/APIError';
+import path from 'path';
 
 const app = express();
 
@@ -26,6 +27,9 @@ app.use(cors());
 
 // mount all routes on /api path
 app.use('/api', routes);
+
+app.use('/', express.static(path.join(__dirname, '../../client/dist')))
+
 
 // if error is not an instanceOf APIError, convert it.
 app.use((err, req, res, next) => {

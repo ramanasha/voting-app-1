@@ -118,7 +118,7 @@ PollSchema.statics = {
    * @param {number} limit - Limit number of polls to be returned.
    * @returns {Promise<Poll[]>}
    */
-  list({ skip = 0, limit = 50 } = {}) {
+  list({ skip = 0, limit = 10 } = {}) {
     return this.find()
       .sort({ createdAt: -1 })
       .skip(+skip)
@@ -133,7 +133,7 @@ PollSchema.statics = {
    * @param {number} limit - Limit number of polls to be returned.
    * @returns {Promise<Poll[]>}
    */
-  listUserPolls({ user = 0, skip = 0, limit = 50 } = {}) {
+  listUserPolls({ user = 0, skip = 0, limit = 10 } = {}) {
     return this.find({user: user})
       .sort({ createdAt: -1 })
       .skip(+skip)

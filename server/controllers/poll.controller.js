@@ -3,6 +3,7 @@ import httpStatus from 'http-status';
 import APIError from '../errors/APIError';
 import config from '../config/config';
 import Poll from '../models/poll.model';
+import Vote from '../models/vote.model';
 
 /**
  * Get user polls list.
@@ -11,17 +12,22 @@ import Poll from '../models/poll.model';
  * @returns {data: Poll[], pagination: Pagination}
  */
 function list(req, res, next) {
-  const { limit = 50, skip = 0 } = req.query;
+  const { page = 1 } = req.query;
   const user = req.user.id;
   (async function() {
     try {
-      const polls = await Poll.listUserPolls({ user, skip, limit });
       const count = await Poll.countUserPolls(user);
+      const limit = 10;
+      const totalPages = Math.ceil(count / limit);
+      const currentPage = page < 1 ? 1 : (page > totalPages ? totalPages : page);
+      const skip = Math.max(0, (currentPage - 1) * limit);
+
+      const polls = await Poll.listUserPolls({ user, skip, limit });
       return res.json({
         data: polls,
         pagination: {
-          currentPage: ~~(skip / limit) + 1,
-          totalPages: Math.ceil(count / limit),
+          page: +currentPage,
+          totalPages,
           count,
           limit,
           skip
@@ -82,6 +88,7 @@ function update(req, res, next) {
       if(poll.user != req.user.id) throw new APIError('No permission to access this resource!', httpStatus.FORBIDDEN, true);
 
       poll.title = req.body.title;
+      poll.options.push(...(req.body.options.map(title => ({title: title}))));
 
       const updatedPoll = await poll.save();
       return res.json({ data: updatedPoll });
@@ -102,6 +109,7 @@ function remove(req, res, next) {
       const poll = await Poll.get(pollId);
       if(poll.user != req.user.id) throw new APIError('No permission to access this resource!', httpStatus.FORBIDDEN, true);
 
+      const votes = await Vote.remove({poll: pollId});
       const deletedPoll = await poll.remove();
       return res.json({ data: deletedPoll });
     } catch(error) {
