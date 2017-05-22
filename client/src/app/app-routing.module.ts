@@ -16,7 +16,6 @@ import { AuthGuard } from './auth/auth-guard.service';
 import { NonAuthGuard } from './auth/non-auth-guard.service';
 
 const appRoutes: Routes = [
-  // { path: '', redirectTo: 'manage/polls', pathMatch: 'full' },
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'polls', component: PollsComponent, children: [
     { path: ':id', component: PollComponent },

@@ -32,3 +32,16 @@ input.ng-invalid.ng-touched {
 .modal-header {
   background-color: #f7f7f9;
 }
+
+.modal-body {
+  min-height: 125px;
+}
+
+.loader {
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+  vertical-align: middle;
+  background: url(/assets/loader.gif) center no-repeat;
+  background-size: 25px;
+}

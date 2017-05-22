@@ -31,7 +31,7 @@ app.use('/', express.static('client/dist'));
 // mount all routes on /api path
 app.use('/api', routes);
 
-// all non-API call return the index.html file
+// all non-API call return the index.html file with the angular app
 const router = express.Router(); // eslint-disable-line new-cap
 router.use('/*', function(req, res){
   return res.sendFile('index.html', {

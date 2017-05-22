@@ -29,6 +29,7 @@ export class PollComponent implements OnInit {
   poll: Poll;
   error: string;
   id: string;
+  loading: boolean;
   colors: string[] = ['#58e000', '#ffa073', '#970026', '#ff7300', '#096da4'];
 
   constructor(
@@ -37,6 +38,7 @@ export class PollComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.loading = true;
     this.route.params
       .subscribe(
         (params: Params) => {
@@ -51,21 +53,27 @@ export class PollComponent implements OnInit {
   }
 
   onVote(option: string) {
+    this.loading = true;
     this.pollsService.vote(this.id, option)
       .then(poll => {
         this.poll = poll;
+        this.loading = false;
       })
       .catch(error => this.showError(error))
   }
 
   private loadPoll() {
     this.pollsService.getPoll(this.id)
-      .then(poll => this.poll = poll)
+      .then(poll => {
+        this.loading = false;
+        this.poll = poll;
+      })
       .catch(error => this.showError(error));
   }
 
   private showError(error: string) {
     this.error = error;
+    this.loading = false;
     setTimeout(() => this.error = '', 5000);
   }
 }

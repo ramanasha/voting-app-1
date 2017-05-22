@@ -21,15 +21,12 @@
           <hr>
           <div formGroupName="options">
             <div class="row" *ngFor="let optionCtrl of optionControls(); let i = index" [formGroupName]="i">
-              <div class="col-12">
-                <small>Poll Option Title</small>
-              </div>
               <div class="col-10 form-group">
                 <input type="text" id="option-{{ i }}" class="form-control" formControlName="title" placeholder="Poll Option Title">
                 <small class="error" *ngIf="!optionCtrl.valid && optionCtrl.touched ">Option title should be 1 to 50 characters long</small>
               </div>
               <div class="col-2 form-group text-right">
-                <button type="button" class="btn btn-outline-danger btn-sm" (click)="onDeletePollOption(i)">&times;</button>
+                <button type="button" class="btn btn-outline-danger" (click)="onDeletePollOption(i)">&times;</button>
               </div>
             </div>
             <div class="row">
@@ -42,9 +39,10 @@
           <div class="form-group" *ngIf="editMode">
             <ul class="list-group">
               <li class="list-group-item list-group-item-info justify-content-between">Poll Options</li>
-              <li class="list-group-item justify-content-between" *ngFor="let option of poll?.options; let i = index">
-                {{ i + 1}}. {{ option.title }}
+              <li class="list-group-item list-group-item-action justify-content-between" *ngFor="let option of poll?.options; let i = index" [title]="(option.votes/poll.votes | percent) + ' of votes'">
+                {{ option.title }}
                 <span class="badge badge-default badge-pill">{{ option.votes }} votes</span>
+                <div class="indicator" [ngStyle]="{'background-color': colors[i%colors.length], width: option.votes/poll.votes | percent}"></div>
               </li>
             </ul>
           </div>

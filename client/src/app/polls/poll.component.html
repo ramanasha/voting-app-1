@@ -3,7 +3,7 @@
 
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">{{ poll?.title }}</h5>
+          <h5 class="modal-title">{{ poll?.title }} <span class="badge badge-default badge-pill">{{poll?.votes}} votes</span> <span class="loader" *ngIf="loading"></span></h5>
           <button type="button" class="close" aria-label="Close" (click)="onClose()">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -14,18 +14,18 @@
           </div>
           <ul class="list-group">
             <li class="list-group-item list-group-item-action justify-content-between" *ngFor="let option of poll?.options; let i = index">
-              <div class="col-md-10">
+              <div class="col-sm-9 col-lg-10">
                 {{ option.title }} <span class="badge badge-default badge-pill">{{ option.votes }} votes</span>
               </div>
-              <div class="col-md-2 text-right">
-                <button class="btn btn-outline-primary btn-sm" type="button" (click)="onVote(option.id)">Vote</button>
+              <div class="col-sm-3 col-lg-2 text-right">
+                <button class="btn btn-outline-primary btn-sm" type="button" (click)="onVote(option.id)" [disabled]="loading">Vote</button>
               </div>
               <div [title]="(option.votes/poll.votes | percent) + ' of votes'" class="indicator" [ngStyle]="{'background-color': colors[i%colors.length], width: option.votes/poll.votes | percent}"></div>
             </li>
           </ul>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" (click)="onClose()">Cancel</button>
+          <button type="button" class="btn btn-secondary" (click)="onClose()">Close</button>
         </div>
       </div>
   </div>

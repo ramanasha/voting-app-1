@@ -1,8 +1,8 @@
 <div class="container">
   <h1 class="title">
-    Polls
+    Polls <span class="loader" *ngIf="loading"></span>
   </h1>
-  <ul class="list-group">
+  <ul class="list-group" *ngIf="polls">
     <li class="list-group-item list-group-item-action justify-content-between" *ngFor="let poll of polls; let i = index" (click)="onNavigate(poll.id)">
       <div class="col-10">
         {{ poll.title }}
@@ -12,7 +12,11 @@
       </div>
     </li>
   </ul>
-  <app-pagination [ellipses]="false" [page]="pagination?.page" [maxSize]="4" [pageSize]="pagination?.limit" [collectionSize]="pagination?.count" (pageChange)="onPageChange($event)" *ngIf="pagination?.totalPages > 1"></app-pagination>
+  <app-pagination [disabled]="loading" [ellipses]="false" [page]="pagination?.page" [maxSize]="4" [pageSize]="pagination?.limit" [collectionSize]="pagination?.count" (pageChange)="onPageChange($event)" *ngIf="pagination?.totalPages > 1"></app-pagination>
+
+  <div class="alert alert-info" role="alert" *ngIf="!polls?.length">
+    <strong>Yikes, no polls found!</strong>
+  </div>
 </div>
 
 <router-outlet></router-outlet>

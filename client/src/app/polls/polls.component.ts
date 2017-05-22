@@ -13,6 +13,7 @@ export class PollsComponent implements OnInit, OnDestroy {
   polls: Poll[];
   pagination;
   subscription: Subscription;
+  loading: boolean;
 
   constructor(
     private pollsService: PollsService,
@@ -20,11 +21,18 @@ export class PollsComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.loadPolls();
+    this.route.queryParams
+      .subscribe(
+        (params: Params) => {
+          this.startLoader();
+          this.loadPolls(params['page']);
+        }
+      );
+
     this.subscription = this.pollsService.pollsChanged
       .subscribe(
         ((msg: string) => {
-
+          this.startLoader();
           this.loadPolls();
         })
       );
@@ -34,24 +42,29 @@ export class PollsComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  private loadPolls() {
-    this.pollsService.getPolls()
-      .then((res) => {
-        this.polls = res.data;
-        this.pagination = res.pagination;
-      });
-  }
-
   onNavigate(id: string) {
     this.router.navigate([id], {relativeTo: this.route});
   }
 
   onPageChange(page: number) {
+    this.router.navigate(['/polls'], {queryParams: {page: page}});
+  }
+
+  private startLoader() {
+    this.loading = true;
+  }
+
+  private endLoader() {
+    this.loading = false;
+  }
+
+  private loadPolls(page: number = 1) {
     this.pollsService.getPolls(page)
       .then((res) => {
         this.polls = res.data;
         this.pagination = res.pagination;
-      })
+        this.endLoader();
+      });
   }
 
 }

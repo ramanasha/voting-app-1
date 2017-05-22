@@ -16,6 +16,7 @@ export class PollEditComponent implements OnInit {
   editMode: boolean = false;
   error: string;
   id: string;
+  colors: string[] = ['#58e000', '#ffa073', '#970026', '#ff7300', '#096da4'];
 
   constructor(
     private pollsService: PollsService,

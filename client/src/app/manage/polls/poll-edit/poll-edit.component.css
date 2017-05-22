@@ -1,0 +1,15 @@
+.indicator {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0%;
+  height: 5px;
+  opacity: .33;
+  transition: all 0.5s ease;
+}
+.list-group-item:last-child .indicator {
+    border-bottom-left-radius: 0.25rem;
+}
+.list-group-item:hover .indicator {
+  opacity: 1;
+}
