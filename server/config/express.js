@@ -25,11 +25,20 @@ app.use(compress());
 app.use(helmet());
 app.use(cors());
 
+
+app.use('/', express.static('client/dist'));
+
 // mount all routes on /api path
 app.use('/api', routes);
 
-app.use('/', express.static(path.join(__dirname, '../../client/dist')))
-
+// all non-API call return the index.html file
+const router = express.Router(); // eslint-disable-line new-cap
+router.use('/*', function(req, res){
+  return res.sendFile('index.html', {
+    root: 'client/dist/'
+  });
+});
+app.use(router);
 
 // if error is not an instanceOf APIError, convert it.
 app.use((err, req, res, next) => {
