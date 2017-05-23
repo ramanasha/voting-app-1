@@ -10,7 +10,7 @@ import { Poll } from './poll';
 })
 export class PollsComponent implements OnInit {
   polls: Poll[] = [];
-  pagination;
+  pagination: any;
   subscription: Subscription;
   timeoutID: any;
   msg: string;

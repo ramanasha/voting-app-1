@@ -11,7 +11,8 @@ import { Poll } from './poll';
 })
 export class PollsComponent implements OnInit, OnDestroy {
   polls: Poll[];
-  pagination;
+  pagination: any;
+  page: number;
   subscription: Subscription;
   loading: boolean;
 
@@ -26,6 +27,7 @@ export class PollsComponent implements OnInit, OnDestroy {
         (params: Params) => {
           this.startLoader();
           this.loadPolls(params['page']);
+          this.page = params['page'];
         }
       );
 
@@ -33,7 +35,7 @@ export class PollsComponent implements OnInit, OnDestroy {
       .subscribe(
         ((msg: string) => {
           this.startLoader();
-          this.loadPolls();
+          this.loadPolls(this.page);
         })
       );
   }
@@ -43,7 +45,7 @@ export class PollsComponent implements OnInit, OnDestroy {
   }
 
   onNavigate(id: string) {
-    this.router.navigate([id], {relativeTo: this.route});
+    this.router.navigate([id], {relativeTo: this.route, queryParamsHandling: 'merge'});
   }
 
   onPageChange(page: number) {

@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpModule, RequestOptions, Http } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { PollsComponent as ManagePollsComponent } from './manage/polls/polls.component';
@@ -18,6 +18,7 @@ import { NonAuthGuard } from './auth/non-auth-guard.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './auth/auth.module';
+
 import { HeaderComponent } from './header/header.component';
 import { PollDeleteComponent } from './manage/polls/poll-delete/poll-delete.component';
 import { NotFoundComponent } from './not-found/not-found.component';
@@ -27,6 +28,7 @@ import { PollsComponent } from './polls/polls.component';
 import { PollComponent } from './polls/poll.component';
 import { FooterComponent } from './footer/footer.component';
 import { PaginationComponent } from './shared/pagination/pagination.component';
+import { MenuTogglerDirective } from './header/menu-toggler.directive';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,8 @@ import { PaginationComponent } from './shared/pagination/pagination.component';
     PollsComponent,
     FooterComponent,
     PaginationComponent,
-    PollComponent
+    PollComponent,
+    MenuTogglerDirective
   ],
   imports: [
     BrowserModule,

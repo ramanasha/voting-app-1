@@ -8,6 +8,7 @@ import { AuthService } from '../auth/auth.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
+  menuExpanded: boolean = false;
 
   constructor(
     private auth: AuthService,
@@ -21,5 +22,4 @@ export class HeaderComponent {
   loggedIn() {
     return this.auth.isAuthenticated();
   }
-
 }

@@ -6,10 +6,11 @@
 
 # aot
 /aot
-.js
-.js.map
-.ngsummary.json
-.ngfactory.ts
+src/**/*.js
+*.js.map
+*.ngsummary.json
+*.ngfactory.ts
+*.ngstyle.ts
 
 # dependencies
 /node_modules

@@ -10,7 +10,7 @@
   "author": "Vanco Stojkov <van100j@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon ./server/index.js --exec babel-node",
+    "start": "nodemon ./server/index.js --exec babel-node --ignore 'client'",
     "build": "yarn run clean && ./node_modules/.bin/webpack ",
     "build-server": "./node_modules/.bin/babel -d ./dist/server ./server --ignore /tests/ --no-comments --compact true --minified",
     "heroku-postbuild": "yarn run build",

@@ -4,12 +4,7 @@
   </h1>
   <ul class="list-group" *ngIf="polls">
     <li class="list-group-item list-group-item-action justify-content-between" *ngFor="let poll of polls; let i = index" (click)="onNavigate(poll.id)">
-      <div class="col-10">
-        {{ poll.title }}
-      </div>
-      <div class="col-2 text-right">
-        <span class="badge badge-default badge-pill">{{ poll.votes }} votes</span>
-      </div>
+    {{ poll.title }} <span class="badge badge-default badge-pill mb-2 mt-2">{{ poll.votes }} votes</span>
     </li>
   </ul>
   <app-pagination [disabled]="loading" [ellipses]="false" [page]="pagination?.page" [maxSize]="4" [pageSize]="pagination?.limit" [collectionSize]="pagination?.count" (pageChange)="onPageChange($event)" *ngIf="pagination?.totalPages > 1"></app-pagination>

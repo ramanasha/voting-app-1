@@ -9,8 +9,8 @@ import { tokenNotExpired } from 'angular2-jwt';
 @Injectable()
 export class AuthService {
   private apiUrl = environment.apiRootUrl + '/auth';
-  token;
-  user;
+  token: string;
+  user: any;
 
   constructor(
     private http: Http,

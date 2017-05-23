@@ -35,7 +35,7 @@ export class PollEditComponent implements OnInit {
   }
 
   onSubmit() {
-    const options = this.pollForm.value.options.map((option) => new PollOption(option.title));
+    const options = this.pollForm.value.options.map((option: any) => new PollOption(option.title));
     const title: string = this.pollForm.value.title;
     const newPoll = { title, options };
 

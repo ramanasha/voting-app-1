@@ -1,3 +1,16 @@
+html {
+  height: 100%;
+}
+body {
+  margin:0;
+  min-height:100%;
+  position: relative;
+}
+
+body {
+  padding-bottom: 220px;
+}
+
 .title {
   margin: 50px 0 25px;
 }
@@ -14,6 +27,12 @@ input.ng-invalid.ng-touched {
   border: 1px solid red;
 }
 
+.badge-default {
+  color: #636c72;
+  border: 1px solid #636c72;
+  background-color: transparent;
+}
+
 /** modal **/
 .modal {
   overflow-x: hidden;
@@ -27,6 +46,16 @@ input.ng-invalid.ng-touched {
 
 .modal.show {
   display: block;
+}
+
+.modal-dialog {
+  margin-top: 60px;
+}
+
+@media (min-width: 576px) {
+  .modal-dialog {
+    margin-top: 60px;
+  }
 }
 
 .modal-header {

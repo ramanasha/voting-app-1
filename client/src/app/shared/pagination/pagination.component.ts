@@ -143,7 +143,7 @@ export class PaginationComponent implements OnChanges {
   /**
    * @internal
    */
-  isEllipsis(pageNumber): boolean { return pageNumber === -1; }
+  isEllipsis(pageNumber: number): boolean { return pageNumber === -1; }
 
   /**
    * Appends ellipses and first/last page number to the displayed pages
@@ -205,7 +205,7 @@ export class PaginationComponent implements OnChanges {
     return [start, end];
   }
 
-  private _setPageInRange(newPageNo) {
+  private _setPageInRange(newPageNo: number) {
     const prevPageNo = this.page;
     this.page = getValueInRange(newPageNo, this.pageCount, 1);
 

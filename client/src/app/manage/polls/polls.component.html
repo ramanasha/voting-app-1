@@ -10,17 +10,16 @@
   </div>
   <ul class="list-group">
     <li class="list-group-item list-group-item-action justify-content-between" *ngFor="let poll of polls; let i = index">
-      <div class="col-10">
+      <div class="form-group">
         {{ poll.title }}
         <span class="badge badge-default badge-pill">{{ poll.votes }} votes</span>
       </div>
-      <div class="col-2 text-right">
+      <div class="col-12 text-right">
         <a routerLink="{{ poll.id }}" class="btn btn-sm btn-primary mb-1">Edit</a>
         <a [routerLink]="[poll.id, 'delete']" class="btn btn-sm btn-danger mb-1">Delete</a>
       </div>
     </li>
   </ul>
-
   <app-pagination [ellipses]="false" [page]="pagination?.page" [maxSize]="4" [pageSize]="pagination?.limit" [collectionSize]="pagination?.count" (pageChange)="onPageChange($event)" *ngIf="pagination?.totalPages > 1"></app-pagination>
 
   <div class="alert alert-info" role="alert" *ngIf="!polls.length">

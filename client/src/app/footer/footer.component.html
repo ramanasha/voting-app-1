@@ -2,13 +2,12 @@
   <div class="container">
     <ul>
       <li><a routerLink="/">Home</a></li>
+      <li> / </li>
       <li><a routerLink="/polls">Polls</a></li>
-      <li *ngIf="loggedIn()"> // </li>
+      <li *ngIf="loggedIn()"> / </li>
       <li *ngIf="loggedIn()"><a routerLink="/manage/polls">Your Polls</a></li>
+      <li *ngIf="loggedIn()"> / </li>
       <li *ngIf="loggedIn()"><a routerLink="/account">Account</a></li>
-    </ul>
-    <ul>
-
     </ul>
     <p>Voting App &copy; 2017</p>
   </div>

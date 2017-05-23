@@ -11,7 +11,7 @@ import { AuthService } from '../auth.service';
 export class LoginComponent implements OnInit, OnDestroy {
   loginForm: FormGroup;
   error: string;
-  timeoutID;
+  timeoutID: any;
 
   constructor(
     private authService: AuthService,

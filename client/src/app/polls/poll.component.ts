@@ -49,7 +49,7 @@ export class PollComponent implements OnInit {
   }
 
   onClose() {
-    this.router.navigate(['../'], {relativeTo: this.route});
+    this.router.navigate(['../'], {relativeTo: this.route, queryParamsHandling: 'merge'});
   }
 
   onVote(option: string) {
