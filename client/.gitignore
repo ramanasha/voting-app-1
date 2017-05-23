@@ -4,6 +4,13 @@
 /tmp
 /out-tsc
 
+# aot
+/aot
+.js
+.js.map
+.ngsummary.json
+.ngfactory.ts
+
 # dependencies
 /node_modules
 
